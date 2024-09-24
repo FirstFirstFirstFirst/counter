@@ -1,23 +1,16 @@
-FROM node:18-alpine AS builder
+FROM node:18-alpine
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm install --frozen-lockfile
+RUN npm install
 
 COPY . .
 
-RUN npm run build
-
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY --from=builder /app ./
-
-RUN npm install --production
-
 EXPOSE 3000
 
-CMD ["npm", "start"]
+ENV PORT=3000
+ENV NEXT_PUBLIC_PORT=3000
+
+CMD ["npm", "run", "dev"]
