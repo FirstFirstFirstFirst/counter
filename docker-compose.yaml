@@ -6,21 +6,7 @@ services:
     container_name: counter_app
     restart: always
     ports:
-      - "8080:3000" # Map host port 8080 to container port 3000
+      - 3000:3000" 
     environment:
       - MONGODB_URI=${MONGODB_URI}
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo:4.4
-    container_name: counter_mongo
-    restart: always
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-    volumes:
-      - mongo_data:/data/db
-
-volumes:
-  mongo_data:
+  
